@@ -12,30 +12,30 @@ type GoTag struct {
 
 func (cur *GoTag) String() string {
 	b := new(bytes.Buffer)
-	if cur.name == "" {
-		return ""
-	}
-	b.WriteByte('<')
-	b.WriteString(cur.name)
-	b.WriteByte(' ')
-
-	for k, v := range cur.property {
-		b.WriteString(k)
-		b.WriteByte('=')
-		b.WriteString(v)
+	if cur.name != "" {
+		b.WriteByte('<')
+		b.WriteString(cur.name)
 		b.WriteByte(' ')
+
+		for k, v := range cur.property {
+			b.WriteString(k)
+			b.WriteByte('=')
+			b.WriteString(v)
+			b.WriteByte(' ')
+		}
+		b.WriteByte('>')
 	}
-	b.WriteByte('>')
 	if !cur.selfclosing {
 		// 非自闭合，输出里面的内容和尾巴
 		for _, v := range cur.tags {
 			b.WriteString(v.String())
 			b.WriteByte(' ')
 		}
-
-		b.WriteString("</")
-		b.WriteString(cur.name)
-		b.WriteByte('>')
+		if cur.name != "" {
+			b.WriteString("</")
+			b.WriteString(cur.name)
+			b.WriteByte('>')
+		}
 	}
 
 	return b.String()

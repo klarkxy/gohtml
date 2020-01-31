@@ -21,9 +21,12 @@ func Text(str string) *GoText {
 func Tag(name string, propertys ...P) *GoTag {
 	cur := NewTag()
 	cur.name = name
-	for _, property := range propertys {
-		for k, v := range property {
-			cur.property[k] = v
+	if propertys != nil {
+		cur.property = make(P)
+		for _, property := range propertys {
+			for k, v := range property {
+				cur.property[k] = v
+			}
 		}
 	}
 	return cur

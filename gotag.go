@@ -54,9 +54,12 @@ func (cur *GoTag) Append(txts ...gotext) *GoTag {
 func (cur *GoTag) Tag(name string, propertys ...P) *GoTag {
 	newtag := NewTag()
 	newtag.name = name
-	for _, property := range propertys {
-		for k, v := range property {
-			newtag.property[k] = v
+	if propertys != nil {
+		newtag.property = make(P)
+		for _, property := range propertys {
+			for k, v := range property {
+				newtag.property[k] = v
+			}
 		}
 	}
 	cur.Append(newtag)

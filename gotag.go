@@ -12,9 +12,11 @@ type GoTag struct {
 
 func (cur *GoTag) String() string {
 	b := new(bytes.Buffer)
-	b.WriteByte('<')
-	b.WriteString(cur.name)
-	b.WriteByte(' ')
+	if cur.name != "" {
+		b.WriteByte('<')
+		b.WriteString(cur.name)
+		b.WriteByte(' ')
+	}
 
 	for k, v := range cur.property {
 		b.WriteString(k)
@@ -30,9 +32,11 @@ func (cur *GoTag) String() string {
 			b.WriteByte(' ')
 		}
 
-		b.WriteString("</")
-		b.WriteString(cur.name)
-		b.WriteByte('>')
+		if cur.name != "" {
+			b.WriteString("</")
+			b.WriteString(cur.name)
+			b.WriteByte('>')
+		}
 	}
 
 	return b.String()

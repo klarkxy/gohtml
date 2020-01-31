@@ -1,8 +1,9 @@
 package gohtml
 
-import "bytes"
-
-import "fmt"
+import (
+	"bytes"
+	"fmt"
+)
 
 // GoTag: <{name} {property}>{tags}</{name}>
 type GoTag struct {
@@ -40,7 +41,6 @@ func (cur *GoTag) String() string {
 			b.WriteByte('>')
 		}
 	}
-	b.WriteByte('\n')
 
 	return b.String()
 }
@@ -90,5 +90,12 @@ func (cur *GoTag) Tag(name string, propertys ...P) *GoTag {
 // 设置当前Tag为self-Closing，返回当前Tag
 func (cur *GoTag) SelfClosing() *GoTag {
 	cur.selfclosing = true
+	return cur
+}
+
+// 在当前Tag中插入一条string
+func (cur *GoTag) Text(str string) *GoTag {
+	buf := bytes.NewBufferString(str)
+	cur.Append(buf)
 	return cur
 }

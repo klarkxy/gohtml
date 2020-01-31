@@ -50,6 +50,12 @@ func (cur *GoTag) Append(txts ...gotext) *GoTag {
 	return cur
 }
 
+// 与Append的区别在于，Inc实际上不会进行任何操作，在参数计算的时候会自动完成插入功能
+// 推荐用法：html.Inc(html.Tag("xxx"), html.Text("yyy"))
+func (cur *GoTag) Inc(txts ...GoText) *GoTag {
+	return cur
+}
+
 // 在当前Tag下新建一个Tag，返回值为新建出来的Tag
 func (cur *GoTag) Tag(name string, propertys ...P) *GoTag {
 	newtag := NewTag()

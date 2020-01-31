@@ -18,4 +18,9 @@ func main() {
 	htm2 := gohtml.NewTag()
 	htm2.Tag("a", gohtml.P{"href": "www.baidu.com"}).Text("前往百度")
 	fmt.Println(htm2.String())
+
+	// Example 3
+	fmt.Println("Example 3:")
+	htm3 := gohtml.NewTag()
+	htm3.Tag("table", gohtml.P{"border", "1"}).Append(gohtml.Tag())
 }

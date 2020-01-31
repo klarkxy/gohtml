@@ -7,7 +7,11 @@ import (
 )
 
 func main() {
-	html := gohtml.NewTag()
-	html.Tag("p").Text("Hello World!")
-	fmt.Println(html.String())
+	// Example 1
+	fmt.Println("Example 1:")
+	htm1 := gohtml.Tag("p").Text("Hello World!")
+	fmt.Println(htm1.String())
+
+	// Example 2
+	fmt.Println("Example 2:")
 }

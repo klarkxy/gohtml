@@ -37,6 +37,7 @@ func (cur *GoTag) String() string {
 			b.WriteByte('>')
 		}
 	}
+	b.WriteByte('\n')
 
 	return b.String()
 }
@@ -60,6 +61,12 @@ func (cur *GoTag) Tag(name string, propertys ...P) *GoTag {
 	}
 	cur.Append(newtag)
 	return newtag
+}
+
+// 设置当前Tag为self-Closing，返回当前Tag
+func (cur *GoTag) SelfClosing() *GoTag {
+	cur.selfclosing = true
+	return cur
 }
 
 // 在当前Tag下新建一个Text，返回值为新建出来的Gotext（其实无意义）

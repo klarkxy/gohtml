@@ -19,7 +19,6 @@ func Text(str string) *GoText {
 }
 
 func Tag(name string, propertys ...P) *GoTag {
-
 	cur := NewTag()
 	cur.name = name
 	for _, property := range propertys {

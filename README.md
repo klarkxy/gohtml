@@ -10,6 +10,14 @@
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+##### 第一个例子
+```
+htm1 := gohtml.NewTag()
+htm1.Tag("p").Text("Hello World!")
+fmt.Println(htm1.String())
+```
+输出
+```
+<p >Hello World! </p>
+```
+##### 加入一些属性

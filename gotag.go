@@ -53,7 +53,7 @@ func (cur *GoTag) Append(txts ...gotext) *GoTag {
 
 // 与Append的区别在于，Inc实际上不会进行任何操作，在参数计算的时候会自动完成插入功能
 // 推荐用法：html.Inc(html.Tag("xxx"), html.Text("yyy"))
-func (cur *GoTag) Inc(txts ...GoText) *GoTag {
+func (cur *GoTag) Inc(txts ...gotext) *GoTag {
 	return cur
 }
 

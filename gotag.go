@@ -19,9 +19,9 @@ func (cur *GoTag) String() string {
 
 		for k, v := range cur.property {
 			b.WriteString(k)
-			b.WriteByte('=')
+			b.WriteString("=\"")
 			b.WriteString(v)
-			b.WriteByte(' ')
+			b.WriteString("\" ")
 		}
 		b.WriteByte('>')
 	}

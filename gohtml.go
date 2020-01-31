@@ -5,7 +5,7 @@ type P map[string]string
 
 // 包含两种类型：GoText/GoTag
 type gotext interface {
-	text() string
+	String() string
 }
 
 // 创建一个GoTag对象
@@ -14,8 +14,8 @@ func NewTag() *GoTag {
 }
 
 // 创建一个GoText对象
-func Text(txt string) *GoText {
-	return &GoText{txt: txt}
+func Text(str string) *GoText {
+	return &GoText{txt: str}
 }
 
 func Tag(name string, propertys ...P) *GoTag {

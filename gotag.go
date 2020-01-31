@@ -10,7 +10,7 @@ type GoTag struct {
 	selfclosing bool     // 是否自闭合
 }
 
-func (cur *GoTag) text() string {
+func (cur *GoTag) String() string {
 	b := new(bytes.Buffer)
 	b.WriteByte('<')
 	b.WriteString(cur.name)
@@ -26,7 +26,7 @@ func (cur *GoTag) text() string {
 	if !cur.selfclosing {
 		// 非自闭合，输出里面的内容和尾巴
 		for _, v := range cur.tags {
-			b.WriteString(v.text())
+			b.WriteString(v.String())
 			b.WriteByte(' ')
 		}
 

@@ -2,12 +2,15 @@ package gohtml
 
 import "bytes"
 
+import "fmt"
+
 // GoTag: <{name} {property}>{tags}</{name}>
 type GoTag struct {
-	name        string   // tag名
-	property    P        // 属性 xxx=xxx
-	tags        []gotext // 里面包含的tag/text
-	selfclosing bool     // 是否自闭合
+	name        string         // tag名
+	property    P              // 属性 xxx=xxx
+	tags        []fmt.Stringer // 所有支持String()输出的都可以作为tags
+	selfclosing bool           // 是否自闭合
+	master      *GoTag         // 上一个，注意可能溢出
 }
 
 func (cur *GoTag) String() string {
@@ -44,17 +47,15 @@ func (cur *GoTag) String() string {
 
 // 在当前Tag中插入若干个Tag/Text，返回值为当前Tag
 // 谨慎调用，可能会出现重复的情况
-func (cur *GoTag) Append(txts ...gotext) *GoTag {
+func (cur *GoTag) Append(txts ...fmt.Stringer) *GoTag {
 	for _, v := range txts {
 		cur.tags = append(cur.tags, v)
 	}
 	return cur
 }
 
-// 与Append的区别在于，Inc实际上不会进行任何操作，在参数计算的时候会自动完成插入功能
-// 推荐用法：html.Inc(html.Tag("xxx"), html.Text("yyy"))
-func (cur *GoTag) Inc(txts ...gotext) *GoTag {
-	return cur
+func (cur *GoTag) Master() *GoTag {
+	return cur.master
 }
 
 // 更复杂的嵌套，用函数来实现吧
@@ -81,6 +82,7 @@ func (cur *GoTag) Tag(name string, propertys ...P) *GoTag {
 			}
 		}
 	}
+	newtag.master = cur
 	cur.Append(newtag)
 	return newtag
 }
@@ -89,11 +91,4 @@ func (cur *GoTag) Tag(name string, propertys ...P) *GoTag {
 func (cur *GoTag) SelfClosing() *GoTag {
 	cur.selfclosing = true
 	return cur
-}
-
-// 在当前Tag下新建一个Text，返回值为新建出来的Gotext（其实无意义）
-func (cur *GoTag) Text(txt string) *GoText {
-	newtext := Text(txt)
-	cur.Append(newtext)
-	return newtext
 }

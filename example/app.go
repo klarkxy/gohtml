@@ -22,7 +22,15 @@ func main() {
 	// Example 3
 	fmt.Println("Example 3:")
 	htm3 := gohtml.NewTag()
-	htm3.Tag("table", gohtml.P{"border", "1"}).Inc(
-		htm3.Tag("tr")
-	)
+	htm3.Tag("table", gohtml.P{"border": "1"}).Func(func(htm *gohtml.GoTag) {
+		htm.Tag("tr").Inc(
+			htm.Tag("td").Text("1"),
+			htm.Tag("td").Text("2"),
+		)
+		htm.Tag("tr").Inc(
+			htm.Tag("td").Text("3"),
+			htm.Tag("td").Text("4"),
+		)
+	})
+	fmt.Println(htm3.String())
 }

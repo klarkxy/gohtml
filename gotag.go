@@ -58,7 +58,14 @@ func (cur *GoTag) Inc(txts ...GoText) *GoTag {
 }
 
 // 更复杂的嵌套，用函数来实现吧
-func (cur *GoTag) Func(fn func(*GoTag) *GoTag) *GoTag {
+// 该函数没有返回值，通常作为一条语句的最末端，需要返回值用FuncR
+func (cur *GoTag) Func(fn func(*GoTag)) {
+	fn(cur)
+}
+
+// 更复杂的嵌套，用函数来实现吧
+// 该函数带返回值，返回值为当前Tag
+func (cur *GoTag) FuncR(fn func(*GoTag) *GoTag) *GoTag {
 	return fn(cur)
 }
 

@@ -43,6 +43,7 @@ func (cur *GoTag) String() string {
 }
 
 // 在当前Tag中插入若干个Tag/Text，返回值为当前Tag
+// 谨慎调用，可能会出现重复的情况
 func (cur *GoTag) Append(txts ...gotext) *GoTag {
 	for _, v := range txts {
 		cur.tags = append(cur.tags, v)
@@ -54,6 +55,11 @@ func (cur *GoTag) Append(txts ...gotext) *GoTag {
 // 推荐用法：html.Inc(html.Tag("xxx"), html.Text("yyy"))
 func (cur *GoTag) Inc(txts ...GoText) *GoTag {
 	return cur
+}
+
+// 更复杂的嵌套，用函数来实现吧
+func (cur *GoTag) Func(fn func(*GoTag) *GoTag) *GoTag {
+	return fn(cur)
 }
 
 // 在当前Tag下新建一个Tag，返回值为新建出来的Tag

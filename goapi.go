@@ -5,6 +5,9 @@ package gohtml
 // 设置属性 name="value"，返回值为当前GoTag
 // 一次设置一组，如有重复则覆盖
 func (cur *GoTag) P(name, value string) *GoTag {
+	if cur.property == nil {
+		cur.property = make(map[string]string)
+	}
 	cur.property[name] = value
 	return cur
 }

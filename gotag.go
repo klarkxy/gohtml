@@ -78,8 +78,8 @@ func (cur *GoTag) FuncR(fn func(*GoTag) *GoTag) *GoTag {
 func (cur *GoTag) Tag(name string, propertys ...P) *GoTag {
 	newtag := NewTag()
 	newtag.name = name
+	newtag.property = make(P)
 	if propertys != nil {
-		newtag.property = make(P)
 		for _, property := range propertys {
 			for k, v := range property {
 				newtag.property[k] = v

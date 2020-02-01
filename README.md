@@ -20,6 +20,7 @@ fmt.Println(htm1.String())
 ```
 <p >Hello World! </p>
 ```
+<p >Hello World! </p>
 ##### 加入一些属性
 ```
 htm2 := gohtml.NewTag()
@@ -30,6 +31,7 @@ fmt.Println(htm2.String())
 ```
 <a href="www.baidu.com" >前往百度 </a>
 ```
+<a href="www.baidu.com" >前往百度 </a>
 其中`gohtml.P`==`map[string]string`，可以设置多个
 
 ##### 嵌套
@@ -48,3 +50,16 @@ htm3.Tag("table", gohtml.P{"border": "1"}).Func(func(Htm *gohtml.GoTag) {
 ```
 <table border="1" ><tr ><td >1 </td> <td >2 </td> </tr> <tr ><td >3 </td> <td >4 </td> </tr> </table>
 该例中使用了两种嵌套方式，一种是使用`Func(func(*gohtml.GoTag)`函数进行嵌套，另一种是使用`Master()`函数返回上一层
+
+#### 快捷语义
+
+* `T(name string)`
+    同Tag(name)，插入一个Tag，返回这个Tag
+* `S(name)`
+    插入一个Self-Closing Tag
+* `P(param, value string)`
+    往当前Tag中加入一条属性`param="value"`
+* `M()`
+    获取上一层Tag
+
+#### 一个完整的例子

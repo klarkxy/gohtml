@@ -55,7 +55,11 @@ func (cur *GoTag) Append(txts ...fmt.Stringer) *GoTag {
 }
 
 func (cur *GoTag) Master() *GoTag {
-	return cur.master
+	if cur.master == nil {
+		return &GoTag{}
+	} else {
+		return cur.master
+	}
 }
 
 // 更复杂的嵌套，用函数来实现吧

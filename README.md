@@ -62,4 +62,7 @@ htm3.Tag("table", gohtml.P{"border": "1"}).Func(func(Htm *gohtml.GoTag) {
 * `M()`
     获取上一层Tag
 
-#### 一个完整的例子
+### 联系我
+* QQ: 278370456
+* Mail: 278370456@qq.com
+如果您在使用时遇见了问题，或者有什么意见或者建议，请务必联系我，谢谢。

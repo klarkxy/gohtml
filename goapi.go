@@ -2,10 +2,17 @@ package gohtml
 
 // 此文件设置 快捷语义
 
-// 设置属性，返回值为当前GoTag
+// 设置属性 name="value"，返回值为当前GoTag
 // 一次设置一组，如有重复则覆盖
 func (cur *GoTag) P(name, value string) *GoTag {
 	cur.property[name] = value
+	return cur
+}
+
+// 设置属性 name="name"，返回值为当前GoTag
+// 一次设置一组，如有重复则覆盖
+func (cur *GoTag) PS(name string) *GoTag {
+	cur.property[name] = name
 	return cur
 }
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"gitee.com/Klarkxy/gohtml"
 )
@@ -30,4 +31,19 @@ func main() {
 	})
 	fmt.Println(htm3.String())
 
+	// Example 4
+	fmt.Println("Example 4:")
+	htm4 := gohtml.NewTag()
+	form := htm4.T("form")
+	form.S("input").P("type", "text").P("placeholder", "用户名")
+	form.S("input").P("type", "password").P("placeholder", "密码")
+	form.T("button").P("type", "submit").Text("登录")
+	fmt.Println(htm4.String())
+
+	// Example 5
+	fmt.Println("Example 5:")
+	htm5 := gohtml.NewTag()
+	PWD, _ := os.Getwd()
+	htm5.Html("index.html", PWD+"/index.html").Execute("Hello World!")
+	fmt.Println(htm5.String())
 }

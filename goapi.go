@@ -25,8 +25,3 @@ func (cur *GoTag) T(name string) *GoTag {
 func (cur *GoTag) S(name string) *GoTag {
 	return cur.Tag(name).SelfClosing()
 }
-
-// 返回上一层
-func (cur *GoTag) M() *GoTag {
-	return cur.Master()
-}

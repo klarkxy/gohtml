@@ -97,6 +97,16 @@ func (cur *GoTag) SelfClosing() *GoTag {
 	return cur
 }
 
+// 在当前Tag里新建一个Html模板，返回值为新建出来的模板
+func (cur *GoTag) Html(name, filepath string) *GoHtm {
+	htm := new(GoHtm)
+	htm.name = name
+	htm.filepath = filepath
+	htm.master = cur
+	cur.Append(htm)
+	return htm
+}
+
 // 在当前Tag中插入一条string
 func (cur *GoTag) Text(str string) *GoTag {
 	buf := bytes.NewBufferString(str)

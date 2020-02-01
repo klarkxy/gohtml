@@ -46,4 +46,11 @@ func main() {
 	PWD, _ := os.Getwd()
 	htm5.Html("index.html", PWD+"/index.html").Execute("Hello World!")
 	fmt.Println(htm5.String())
+
+	// Example 6
+	fmt.Println("Example 6:")
+	htm6 := gohtml.NewTag()
+	htm6.S("input", "type", "text", "placeholder", "Hello World!")
+	htm6.T("button", "type", "submit").Text("登录")
+	fmt.Println(htm6.String())
 }

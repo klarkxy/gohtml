@@ -78,6 +78,21 @@ fmt.Println(htm4.String())
 ```
 <form ><input type="text" placeholder="用户名" > <input type="password" placeholder="密码" > <button type="submit" >登录 </button> </form>
 
+同时，`S()`和`T()`中也可以直接成对插入属性
+```go
+	htm6 := gohtml.NewTag()
+	htm6.S("input", "type", "text", "placeholder", "Hello World!")
+	htm6.T("button", "type", "submit").Text("登录")
+	fmt.Println(htm6.String())
+```
+输出
+```html
+<input type="text" placeholder="Hello World!" > <button type="submit" >登录 </button>
+```
+<input type="text" placeholder="Hello World!" > <button type="submit" >登录 </button>
+
+
+
 ### Html模板
 使用`tag.Html(name, filepath)`来导入一个指定位置的Html
 如果要使用模板，则使用`tag.Html(name, filepath).Excute(data)`来导入模板。模板使用方式详见`html/template`

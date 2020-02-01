@@ -1,7 +1,7 @@
 package gohtml
 
 // 作为参数使用，能少写很多字符
-type P map[string]string
+type P = map[string]string
 
 // 创建一个GoTag对象
 func NewTag() *GoTag {

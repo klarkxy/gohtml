@@ -21,6 +21,8 @@ fmt.Println(htm1.String())
 <p >Hello World! </p>
 ```
 <p >Hello World! </p>
+
+
 ##### 加入一些属性
 ```
 htm2 := gohtml.NewTag()
@@ -32,6 +34,8 @@ fmt.Println(htm2.String())
 <a href="www.baidu.com" >前往百度 </a>
 ```
 <a href="www.baidu.com" >前往百度 </a>
+
+
 其中`gohtml.P`==`map[string]string`，可以设置多个
 
 ##### 嵌套

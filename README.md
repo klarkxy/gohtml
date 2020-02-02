@@ -49,9 +49,29 @@ htm3.Tag("table", gohtml.P{"border": "1"}).Func(func(Htm *gohtml.GoTag) {
 ```
 输出
 ```html
-<table border="1" ><tr ><td >1 </td> <td >2 </td> </tr> <tr ><td >3 </td> <td >4 </td> </tr> </table>
+<table border="1" >
+<tr >
+<td >1</td>
+<td >2</td>
+</tr>
+<tr >
+<td >3</td>
+<td >4</td>
+</tr>
+</table>
 ```
-<table border="1" ><tr ><td >1 </td> <td >2 </td> </tr> <tr ><td >3 </td> <td >4 </td> </tr> </table>
+<table border="1" >
+<tr >
+<td >1</td>
+<td >2</td>
+</tr>
+<tr >
+<td >3</td>
+<td >4</td>
+</tr>
+</table>
+
+
 该例中使用了两种嵌套方式，一种是使用`Func(func(*gohtml.GoTag)`函数进行嵌套，另一种是使用`Master()`函数返回上一层
 
 ### 快捷语义
@@ -74,7 +94,11 @@ fmt.Println(htm4.String())
 ```
 输出
 ```html
-<form ><input type="text" placeholder="用户名" > <input type="password" placeholder="密码" > <button type="submit" >登录 </button> </form>
+<form >
+<input placeholder="用户名" type="text" >
+<input type="password" placeholder="密码" >
+<button type="submit" >登录</button>
+</form>
 ```
 
 
@@ -87,7 +111,8 @@ fmt.Println(htm4.String())
 ```
 输出
 ```html
-<input type="text" placeholder="Hello World!" > <button type="submit" >登录 </button>
+<input type="text" placeholder="Hello World!" >
+<button type="submit" >登录</button>
 ```
 
 ### IfP语义

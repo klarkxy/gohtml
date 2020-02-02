@@ -76,7 +76,7 @@ fmt.Println(htm4.String())
 ```html
 <form ><input type="text" placeholder="用户名" > <input type="password" placeholder="密码" > <button type="submit" >登录 </button> </form>
 ```
-<form ><input type="text" placeholder="用户名" > <input type="password" placeholder="密码" > <button type="submit" >登录 </button> </form>
+
 
 同时，`S()`和`T()`中也可以直接成对插入属性
 ```go
@@ -89,7 +89,7 @@ fmt.Println(htm4.String())
 ```html
 <input type="text" placeholder="Hello World!" > <button type="submit" >登录 </button>
 ```
-<input type="text" placeholder="Hello World!" > <button type="submit" >登录 </button>
+
 
 
 
@@ -102,32 +102,6 @@ PWD, _ := os.Getwd()
 htm5.Html("index.html", PWD+"/index.html").Execute("Hello World!")
 fmt.Println(htm5.String())
 ```
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  </head>
-
-  <body>
-    <div class="container">
-      <form class="form-signin" method="POST" action="/">
-        <h2 class="form-signin-heading">Hello World!</h2>
-        <label for="inputUsername" class="sr-only">用户名</label>
-        <input type="username" name="username" id="inputUsername" class="form-control" placeholder="用户名" required autofocus>       
-        <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="密码" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-      </form>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-  </body>
-</html>
-
-
 
 -----------
 ## 联系我

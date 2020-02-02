@@ -30,10 +30,12 @@ func (cur *GoTag) String() string {
 		b.WriteByte('>')
 	}
 	if !cur.selfclosing {
+		if len(cur.tags) > 1 {
+			b.WriteByte('\n')
+		}
 		// 非自闭合，输出里面的内容和尾巴
 		for _, v := range cur.tags {
 			b.WriteString(v.String())
-			b.WriteByte(' ')
 		}
 		if cur.name != "" {
 			b.WriteString("</")
@@ -41,7 +43,7 @@ func (cur *GoTag) String() string {
 			b.WriteByte('>')
 		}
 	}
-
+	b.WriteByte('\n')
 	return b.String()
 }
 

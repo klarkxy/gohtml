@@ -53,4 +53,17 @@ func main() {
 	htm6.S("input", "type", "text", "placeholder", "Hello World!")
 	htm6.T("button", "type", "submit").Text("登录")
 	fmt.Println(htm6.String())
+
+	// Example 7
+	fmt.Println("Example 7:")
+	htm7 := gohtml.NewTag()
+	canedit := false
+	htm7.S("input", "type", "text").IfP(canedit, "readonly", "readonly")
+	canedit = true
+	htm7.S("input", "type", "text").IfP(canedit, "readonly", "readonly")
+	ispassword := false
+	htm7.S("input").IfP(ispassword, "type", "password", "type", "text")
+	ispassword = true
+	htm7.S("input").IfP(ispassword, "type", "password", "type", "text")
+	fmt.Println(htm7.String())
 }

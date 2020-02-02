@@ -90,7 +90,29 @@ fmt.Println(htm4.String())
 <input type="text" placeholder="Hello World!" > <button type="submit" >登录 </button>
 ```
 
-
+### IfP语义
+根据条件设置属性
+* IfP(flag, A, B) ==> if (flag) A="B" else nil
+* IfP(flag, A, B, C, D) ==> if (flag) A="B" else C="D"
+```go
+	htm7 := gohtml.NewTag()
+	canedit := false
+	htm7.S("input", "type", "text").IfP(canedit, "readonly", "readonly")
+	canedit = true
+	htm7.S("input", "type", "text").IfP(canedit, "readonly", "readonly")
+	ispassword := false
+	htm7.S("input").IfP(ispassword, "type", "password", "type", "text")
+	ispassword = true
+	htm7.S("input").IfP(ispassword, "type", "password", "type", "text")
+	fmt.Println(htm7.String())
+```
+输出
+```html
+<input type="text" >
+<input type="text" readonly="readonly" >
+<input type="text" >
+<input type="password" >
+```
 
 
 ### Html模板

@@ -16,6 +16,25 @@ func (cur *GoTag) PS(name string) *GoTag {
 	return cur
 }
 
+// if表达式，根据条件判断设置属性
+// IfP(flag, A, B) ==> if (flag) A="B" else nil
+// IfP(flag, A, B, C, D) ==> if (flag) A="B" else C="D"
+func (cur *GoTag) IfP(flag bool, properties ...string) *GoTag {
+	if properties != nil {
+		if len(properties) >= 4 {
+			if !flag {
+				cur.P(properties[2], properties[3])
+			}
+		}
+		if len(properties) >= 2 {
+			if flag {
+				cur.P(properties[0], properties[1])
+			}
+		}
+	}
+	return cur
+}
+
 // 往cur中插入一个Tag，返回值为插入的这个Tag
 // 可以直接一次性导入多个属性，按顺序分为一对一对
 func (cur *GoTag) T(name string, properties ...string) *GoTag {

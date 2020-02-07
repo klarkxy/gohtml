@@ -1,7 +1,7 @@
 # gohtml
 一个使用go动态生成html的包，通常用于后端渲染html。
 
-另一个README：[gohtml：使用go进行html开发](https://zhuanlan.zhihu.com/p/104894925)
+另一个README：[gohtml：使用go进行html开发]  (https://zhuanlan.zhihu.com/p/104894925)
 [toc]
 
 ## 安装教程
@@ -156,4 +156,4 @@ fmt.Println(htm5.String())
 * QQ: 278370456
 * Mail: 278370456@qq.com
 
-如果您在使用时遇见了问题，或者有什么意见或者建议，请务必联系我，谢谢。
+如果您在使用时遇见了问题，或者有什么意见或者建议，请务必联系我，谢谢。~~~

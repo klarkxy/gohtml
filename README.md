@@ -9,7 +9,6 @@ Version : 1.0
 ## 功能
 * **GoTag**
   GoTag代表一个Html的Tag。使用String()接口来产生形如`<{name} {attr}>{tags}</{name}>`的html代码。
-  GoTag中可以嵌入多个GoTag，具体看下面例子。
 * **GoHtml**
   @TODO
 
@@ -109,9 +108,12 @@ fmt.Println(table.String())
 <table ><tr ><th >1 </th> <th >2 </th> </tr> <tr ><th >3 </th> <th >4 </th> </tr> </table>
 
 ### 更为优美的书写方式
-目前已经支持大部分html-tag，可以直接进行调用。
-同时支持`gohtml.Xxx()`或者`GoTag.Xxx()`的方式。效果同`gohtml.Tag("xxx")`或者`GoTag.Tag("xxx")`
-同样，也支持了`GoTag.Yyy(val string)`的方式，直接设置属性，效果同`GoTag.Attr("yyy", val)`
+目前已经支持大部分html-tag，可以直接进行调用。  
+
+同时支持`gohtml.Xxx()`或者`GoTag.Xxx()`的方式。效果同`gohtml.Tag("xxx")`或者`GoTag.Tag("xxx")`  
+
+同样，也支持了`GoTag.Yyy(val string)`的方式，直接设置属性，效果同`GoTag.Attr("yyy", val)`  
+
 由于html的属性种类繁多，可能会有缺漏，请务必提醒我。
 ```go
 form := gohtml.Form()
@@ -136,6 +138,7 @@ fmt.Println(form.String())
 ## 联系我
 * QQ: 278370456
 * Mail: 278370456@qq.com
-如果您在使用时遇见了问题，或者有意见、建议，请务必联系我，谢谢！
+如果您在使用时遇见了问题，或者有意见、建议，请务必联系我，谢谢！  
+
 
 以上

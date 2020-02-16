@@ -1,3 +1,3 @@
-module gitee.com/Klarkxy/gohtml
+module github.com/klarkxy/gohtml
 
 go 1.13

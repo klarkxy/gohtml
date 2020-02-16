@@ -10,7 +10,7 @@ package main
 import (
 	"fmt"
 
-	"gitee.com/Klarkxy/gohtml"
+	"github.com/klarkxy/gohtml"
 )
 
 func main() {

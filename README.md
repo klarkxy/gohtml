@@ -2,9 +2,7 @@
 Version : 1.0
 使用go动态生成html。
 
-`go get gitee.com/Klarkxy/gohtml`
-
-[toc]
+`go get github.com/klarkxy/gohtml`
 
 
 -----------------

@@ -1,23 +1,49 @@
-# gohtml
-一个使用go动态生成html的包，通常用于后端渲染html。
-
-另一个README：
-[gohtml：使用go进行html开发](https://zhuanlan.zhihu.com/p/104894925)
-
-
-[toc]
-
-## 安装教程
+# GoHtml
+Version : 1.0
+使用go动态生成html。
 
 `go get gitee.com/Klarkxy/gohtml`
 
-## 使用说明
+[toc]
+
+
+-----------------
+## 功能
+* **GoTag**
+  GoTag代表一个Html的Tag。使用String()接口来产生形如`<{name} {attr}>{tags}</{name}>`的html代码。
+  GoTag中可以嵌入多个GoTag，具体看下面例子。
+* **GoHtml**
+  @TODO
+
+
+## GoTag部分
+使用`gohtml.Tag(name)`来创建一个GoTag。
+GoTag的主要接口：
+* **String**()
+  将GoTag转化为html输出。
+  **Return: string**
+* **Append**(tags ...fmt.Stringer)
+  往当前GoTag中增加若干条{tag}，可以添加任意定义了`String()`接口的类型，在输出时将会调用此接口将其转化为字符串
+  **Return**: *GoTag  **当前**GoTag
+* **Tag**(name string)
+  往当前GoTag中新增一条GoTag。
+  **Return**: *GoTag  **新增**GoTag
+* **Text**(str string)
+  往当前GoTag中新增一段string。
+  **Return**: *GoTag  **当前**GoTag
+* **Attr**(name, val string)
+  往当前GoTag中新增一条属性`name="val"`。
+  **Return**: *GoTag  **当前**GoTag
+* **Self**()
+  将当前GoTag设置为SelfClosing-Tag，只包含{name}和{attr}t
+  将会产生形如`<{name} {attr}>`的html代码
+  注意，对设置了Self()的GoTag，所有Append()、Tag()、Text()等增加的{tags}都会失效。
+  **Return**: *GoTag  **当前**GoTag
 
 ### 第一个例子
 ```go
-htm1 := gohtml.NewTag()
-htm1.Tag("p").Text("Hello World!")
-fmt.Println(htm1.String())
+htm1 := gohtml.Tag("p").Text("Hello World!")
+fmt.Println(htm.String())
 ```
 输出
 ```html
@@ -26,137 +52,92 @@ fmt.Println(htm1.String())
 <p >Hello World! </p>
 
 
-### 加入一些属性
+### 设置属性
+#### 设置一个属性
 ```go
-htm2 := gohtml.NewTag()
-htm2.Tag("a", gohtml.P{"href": "www.baidu.com"}).Text("前往百度")
+htm := gohtml.Tag("a").Attr("href", "https://www.zhihu.com/").Text("打开知乎")
+fmt.Println(htm.String())
+```
+输出
+```html
+<a href="https://www.zhihu.com/" >打开知乎 </a>
+```
+<a href="https://www.zhihu.com/" >打开知乎 </a>
+
+
+#### 设置多个属性
+可以多次调用Attr接口，也可以一次性调用中传入多个参数。
+```go
+htm1 := gohtml.Tag("button").Attr("type", "button").Attr("href", "https://www.zhihu.com/").Text("打开知乎")
+htm2 := gohtml.Tag("button").Attr("type", "button", "href", "https://www.zhihu.com/").Text("打开知乎")
+fmt.Println(htm1.String())
 fmt.Println(htm2.String())
 ```
 输出
 ```html
-<a href="www.baidu.com" >前往百度 </a>
+<button type="button" href="https://www.zhihu.com/" >打开知乎 </button>
+<button type="button" href="https://www.zhihu.com/" >打开知乎 </button>
 ```
-<a href="www.baidu.com" >前往百度 </a>
+<button type="button" href="https://www.zhihu.com/" >打开知乎 </button>
 
 
-其中`gohtml.P`=`map[string]string`，可以通过导入map来导入多个属性
-
-### 嵌套
+### SelfClosing Tag
+html的SelfClosing-Tag
 ```go
-htm3 := gohtml.NewTag()
-htm3.Tag("table", gohtml.P{"border": "1"}).Func(func(Htm *gohtml.GoTag) {
-	Htm.Tag("tr").Tag("td").Text("1").
-		Master().Tag("td").Text("2")
-	Htm.Tag("tr").Tag("td").Text("3").
-		Master().Tag("td").Text("4")
-	})
+htm1 := gohtml.Tag("meta").Attr("http-equiv", "X-UA-Compatible").Attr("content", "IE=edge").Self()
+fmt.Println(htm1.String())
 ```
 输出
 ```html
-<table border="1" >
-<tr >
-<td >1</td>
-<td >2</td>
-</tr>
-<tr >
-<td >3</td>
-<td >4</td>
-</tr>
-</table>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" >
 ```
-<table border="1" >
-<tr >
-<td >1</td>
-<td >2</td>
-</tr>
-<tr >
-<td >3</td>
-<td >4</td>
-</tr>
-</table>
 
 
-该例中使用了两种嵌套方式，一种是使用`Func(func(*gohtml.GoTag)`函数进行嵌套，另一种是使用`Master()`函数返回上一层
-
-### 快捷语义
-
-* `T(name string)`
-    同Tag(name)，插入一个Tag，返回这个Tag
-* `S(name)`
-    插入一个Self-Closing Tag
-* `P(param, value string)`
-    往当前Tag中加入一条属性`param="value"`
-
-一般通常情况下建议使用这种模式
+### GoTag的嵌套
 ```go
-htm4 := gohtml.NewTag()
-form := htm4.T("form")
-form.S("input").P("type", "text").P("placeholder", "用户名")
-form.S("input").P("type", "password").P("placeholder", "密码")
-form.T("button").P("type", "submit").Text("登录")
-fmt.Println(htm4.String())
+table := gohtml.Tag("table")
+tr1 := table.Tag("tr")
+tr1.Tag("th").Text("1")
+tr1.Tag("th").Text("2")
+tr2 := table.Tag("tr")
+tr2.Tag("th").Text("3")
+tr2.Tag("th").Text("4")
+fmt.Println(table.String())
 ```
 输出
 ```html
-<form >
-<input placeholder="用户名" type="text" >
-<input type="password" placeholder="密码" >
-<button type="submit" >登录</button>
-</form>
+<table ><tr ><th >1 </th> <th >2 </th> </tr> <tr ><th >3 </th> <th >4 </th> </tr> </table>
 ```
+<table ><tr ><th >1 </th> <th >2 </th> </tr> <tr ><th >3 </th> <th >4 </th> </tr> </table>
 
-
-同时，`S()`和`T()`中也可以直接成对插入属性
+### 更为优美的书写方式
+目前已经支持大部分html-tag，可以直接进行调用。
+同时支持`gohtml.Xxx()`或者`GoTag.Xxx()`的方式。效果同`gohtml.Tag("xxx")`或者`GoTag.Tag("xxx")`
+同样，也支持了`GoTag.Yyy(val string)`的方式，直接设置属性，效果同`GoTag.Attr("yyy", val)`
+由于html的属性种类繁多，可能会有缺漏，请务必提醒我。
 ```go
-	htm6 := gohtml.NewTag()
-	htm6.S("input", "type", "text", "placeholder", "Hello World!")
-	htm6.T("button", "type", "submit").Text("登录")
-	fmt.Println(htm6.String())
+form := gohtml.Form()
+form.H2().Text("Please Sign In")
+form.Input().Type("username").Placeholder("Username").Required().Autofocus()
+form.Input().Type("password").Placeholder("Password").Required()
+divlabel := form.Div().Label()
+divlabel.Input().Type("checkbox").Value("Remember me")
+divlabel.Text("Remember me.")
+form.Button().Type("submit").Text("Sign in")
+fmt.Println(form.String())
 ```
 输出
 ```html
-<input type="text" placeholder="Hello World!" >
-<button type="submit" >登录</button>
+<form><h2>Please Sign In</h2><input type="username" placeholder="Username"><input type="password" placeholder="Password"><div><label><input type="checkbox" value="Remember me">Remember me.</label></div><button type="submit">Sign in</button></form>
 ```
-
-### IfP语义
-根据条件设置属性
-* IfP(flag, A, B) ==> if (flag) A="B" else nil
-* IfP(flag, A, B, C, D) ==> if (flag) A="B" else C="D"
-```go
-	htm7 := gohtml.NewTag()
-	canedit := false
-	htm7.S("input", "type", "text").IfP(canedit, "readonly", "readonly")
-	canedit = true
-	htm7.S("input", "type", "text").IfP(canedit, "readonly", "readonly")
-	ispassword := false
-	htm7.S("input").IfP(ispassword, "type", "password", "type", "text")
-	ispassword = true
-	htm7.S("input").IfP(ispassword, "type", "password", "type", "text")
-	fmt.Println(htm7.String())
-```
-输出
-```html
-<input type="text" >
-<input type="text" readonly="readonly" >
-<input type="text" >
-<input type="password" >
-```
+<form><h2>Please Sign In</h2><input type="username" placeholder="Username"><input type="password" placeholder="Password"><div><label><input type="checkbox" value="Remember me">Remember me.</label></div><button type="submit">Sign in</button></form>
 
 
-### Html模板
-使用`tag.Html(name, filepath)`来导入一个指定位置的Html
-如果要使用模板，则使用`tag.Html(name, filepath).Excute(data)`来导入模板。模板使用方式详见`html/template`
-```go
-htm5 := gohtml.NewTag()
-PWD, _ := os.Getwd()
-htm5.Html("index.html", PWD+"/index.html").Execute("Hello World!")
-fmt.Println(htm5.String())
-```
+-----------------
 
------------
 ## 联系我
 * QQ: 278370456
 * Mail: 278370456@qq.com
+如果您在使用时遇见了问题，或者有意见、建议，请务必联系我，谢谢！
 
-如果您在使用时遇见了问题，或者有什么意见或者建议，请务必联系我，谢谢。~~~
+以上

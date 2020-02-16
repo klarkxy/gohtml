@@ -1,23 +1,21 @@
+/*
+ * @Author       : Klarkxy
+ * @Date         : 2020-02-07 13:30:31
+ * @LastEditors  : Klarkxy
+ * @LastEditTime : 2020-02-16 12:32:00
+ * @FilePath     : \gohtml\html.go
+ */
 package gohtml
-
-// 作为参数使用，能少写很多字符
-type P = map[string]string
 
 // 创建一个GoTag对象
 func NewTag() *GoTag {
-	return &GoTag{}
+	newtag := GoTag{}
+	newtag.attr = make(map[string]string)
+	return &newtag
 }
 
-func Tag(name string, propertys ...P) *GoTag {
+func Tag(name string) *GoTag {
 	cur := NewTag()
 	cur.name = name
-	if propertys != nil {
-		cur.property = make(P)
-		for _, property := range propertys {
-			for k, v := range property {
-				cur.property[k] = v
-			}
-		}
-	}
 	return cur
 }

@@ -44,5 +44,10 @@ id
 name
 for
 placeholder
+lang
+charset
+http-equiv
+content
+rel
 
 

@@ -360,6 +360,14 @@ func (cur *GoTag) H6() *GoTag {
 	return cur.Tag("h6")
 }
 
+//  <html></html>
+func Html() *GoTag {
+	return Tag("html")
+}
+func (cur *GoTag) Html() *GoTag {
+	return cur.Tag("html")
+}
+
 //  <head></head>
 func Head() *GoTag {
 	return Tag("head")

@@ -229,3 +229,28 @@ func (cur *GoTag) For(val string) *GoTag {
 func (cur *GoTag) Placeholder(val string) *GoTag {
 	return cur.Attr("placeholder", val)
 }
+
+//  <?? lang="{val}">
+func (cur *GoTag) Lang(val string) *GoTag {
+	return cur.Attr("lang", val)
+}
+
+//  <?? charset="{val}">
+func (cur *GoTag) Charset(val string) *GoTag {
+	return cur.Attr("charset", val)
+}
+
+//  <?? http-equiv="{val}">
+func (cur *GoTag) Http_equiv(val string) *GoTag {
+	return cur.Attr("http_equiv", val)
+}
+
+//  <?? content="{val}">
+func (cur *GoTag) Content(val string) *GoTag {
+	return cur.Attr("content", val)
+}
+
+//  <?? rel="{val}">
+func (cur *GoTag) Rel(val string) *GoTag {
+	return cur.Attr("rel", val)
+}

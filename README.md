@@ -11,9 +11,13 @@ Version : 1.0
   GoTag代表一个Html的Tag。使用`String()`接口来产生形如`<{name} {attr}>{tags}</{name}>`的html代码。
 * **GoHtml**
   GoHtml代表一个Html的页面。使用`String()`接口来生成Html字符串，或者使用`MinString()`接口来生成紧凑的Html字符串
+* **GoParser** @TODO
+  GoParser是一个Html的解析器，可以将一个符合标准的html文件解析成Gohtml对象。
+* **GoQuery** @TODO
+  GoQuery是一个类JQuery的工具，可以批量对GoTag进行操作。
 
 
-## GoTag部分
+## GoTag
 使用`gohtml.Tag(name)`来创建一个GoTag。
 ### 主要接口：
 ```go
@@ -162,7 +166,7 @@ fmt.Println(form.String())
 </form>
 ```
 
-## GoHtml部分
+## GoHtml
 通常意义上，我们可以把一个html文件分为以下6个部分。
 ```html
 <!DOCTYPE html>
@@ -269,8 +273,8 @@ fmt.Println(bootstrap.String())
   </body>
 </html>
 ```
-现在已经加入了Bootstrap模块，使用`import "github.com/klarkxy/gohtml/bootstrap`来直接使用吧！
-[github.com/klarkxy/gohtml/bootstrap](./bootstrap/README.md)
+现在已经加入了Bootstrap模块，使用`import "github.com/klarkxy/gohtml/bootstrap"`来直接使用吧！
+[github.com/klarkxy/gohtml/bootstrap](./bootstrap)
 
 
 -----------------
@@ -278,6 +282,7 @@ fmt.Println(bootstrap.String())
 ## 联系我
 * QQ: 278370456
 * Mail: 278370456@qq.com
+
 如果您在使用时遇见了问题，或者有意见、建议，请务必联系我，谢谢！  
 
 

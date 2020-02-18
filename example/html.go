@@ -43,6 +43,7 @@ func main() {
 
 		fmt.Println(bootstrap.String())
 	}
+	fmt.Println("")
 	{
 		bootstrap := bootstrap.Bootstrap()
 		// Head

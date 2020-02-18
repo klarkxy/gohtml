@@ -128,7 +128,7 @@ fmt.Println(table.String())
 
 同样，也支持了`GoTag.Yyy(val string)`的方式，直接设置属性，效果同`GoTag.Attr("yyy", val)`  
 
-详见[api.go](./api.go)、[attr].go](./attr.go)、[self.go](./self.go)、[singleattr.go](./singleattr.go)
+详见[api.go](./api.go)、[attr.go](./attr.go)、[self.go](./self.go)、[singleattr.go](./singleattr.go)
 
 由于html的属性种类繁多，可能会有缺漏，请务必提醒我。
 ```go
@@ -271,6 +271,8 @@ fmt.Println(bootstrap.String())
 ```
 现在已经加入了Bootstrap模块，使用`import "github.com/klarkxy/gohtml/bootstrap`来直接使用吧！
 [github.com/klarkxy/gohtml/bootstrap](./bootstrap/README.md)
+
+
 -----------------
 
 ## 联系我

@@ -13,8 +13,8 @@ Version : 1.0
   GoHtml代表一个Html的页面。使用`String()`接口来生成Html字符串，或者使用`MinString()`接口来生成紧凑的Html字符串
 * **GoParser** @TODO
   GoParser是一个Html的解析器，可以将一个符合标准的html文件解析成Gohtml对象。
-* **GoQuery** @TODO
-  GoQuery是一个类JQuery的工具，可以批量对GoTag进行操作。
+* **GoSelector** @TODO
+  GoSelector是一个选择器，使用类似于jQuery选择器的格式，对Gohtml中的Tags进行批量操作
 
 
 ## GoTag

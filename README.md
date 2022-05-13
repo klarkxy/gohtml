@@ -276,14 +276,3 @@ fmt.Println(bootstrap.String())
 现在已经加入了Bootstrap模块，使用`import "github.com/klarkxy/gohtml/bootstrap"`来直接使用吧！
 [github.com/klarkxy/gohtml/bootstrap](./bootstrap)
 
-
------------------
-
-## 联系我
-* QQ: 278370456
-* Mail: 278370456@qq.com
-
-如果您在使用时遇见了问题，或者有意见、建议，请务必联系我，谢谢！  
-
-
-以上
